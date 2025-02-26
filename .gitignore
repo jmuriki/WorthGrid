@@ -161,5 +161,6 @@ cython_debug/
 
 # This project
 .DS_Store
+.obsidian
 calls/
-WorthGrid.wiki/
+WorthGrid.wiki*/
