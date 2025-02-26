@@ -1,7 +1,6 @@
 ***
-# Использование try-except вместо suppress
-- [ ] Анти-паттерн: Использование try-except вместо suppress
 
+>[!quote] Описание
 _Иногда требуется игнорировать исключение.
 Игнорировать ошибку лучше с помощью контекстного менеджера suppress вместо блока try except._
 
@@ -24,7 +23,7 @@ with suppress(UnimportantError):
     function()
 ```
 
-[[[[SOURCE CODE PY]]
+[[SOURCE CODE PY]]
 
 [[SOURCE CODE PY#Бегло проследить поток исполнения программы]]
 

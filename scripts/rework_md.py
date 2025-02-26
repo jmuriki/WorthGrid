@@ -8,6 +8,7 @@ import argparse
 WIKI_BASE_URL = 'github.com/jmuriki/WorthGrid/wiki/'
 SCRIPTS_DIR = os.path.abspath(os.path.dirname(__file__))
 WORTH_GRID_PATH = os.path.join(SCRIPTS_DIR, '..', 'ЦЕННОСТНАЯ СЕТКА')
+TEMPLATES_PATH = os.path.join(SCRIPTS_DIR, '..', 'templates')
 ANTI_PATTERNS_FILENAME = 'АНТИ-ПАТТЕРНЫ'
 ANTI_PATTERNS_FOLDER_NAME = f'3. {ANTI_PATTERNS_FILENAME}'
 SYMBOLS_TO_REMOVE_FROM_LINK = "\"!#$%&'()*+,./:;<=>?@\\^_`{}[]~"
@@ -20,6 +21,7 @@ CANCEL_SIGN = '\U0001F6AB'
 def create_parser():
     parser = argparse.ArgumentParser(description='Скрипт для шаблонной правки файлов Ценностной Сетки.')
     parser.add_argument('-p', '--path', type=str, default=WORTH_GRID_PATH, help='Путь к директории с .md файлами.')
+    parser.add_argument('-t', '--templates', action='store_true', help='Только шаблоны.')
     return parser
 
 
@@ -41,11 +43,20 @@ def rework_md_by_patterns(md_path):
 
     new_content = content
 
-    # Удаление пустой строки между *** и ```
-    pattern = re.compile(r'(?<=^\*{3}\n)[ \t]*\n(?=^```)', re.MULTILINE)
-    match = pattern.search(content)
-    if match:
-        new_content = pattern.sub('', content)
+    # pattern = re.compile(r'```python\n"""\s*Плохо\s*"""\n(.*?)```.*?```python\n"""\s*Хорошо\s*"""\n(.*?)```', re.DOTALL)
+
+    # matches = pattern.findall(new_content)
+
+
+    # new_content = new_content.replace('# [[Контакты]]', '## [[Контакты]]')
+
+    # new_content = new_content.replace('[пиши сюда](https://github.com/jmuriki/WorthGrid/wiki/Контакты)', '[[Контакты|пиши сюда]]')
+
+    # # Удаление пустой строки между *** и ```
+    # pattern = re.compile(r'(?<=^\*{3}\n)[ \t]*\n(?=^```)', re.MULTILINE)
+    # match = pattern.search(content)
+    # if match:
+    #     new_content = pattern.sub('', content)
 
     # # Удаление всего до Coming soon... включительно
     # pattern = re.compile(r'# \*\*Coming soon\.\.\.\*\*', re.IGNORECASE)
@@ -128,13 +139,29 @@ def renew_links(lines, md_path, page_name):
 
         new_lines.append(line)
 
-        header_match = header_pattern.match(line)
-        if header_match:
-            header_url = get_header_url(header_match, page_name)
-            new_lines.insert(len(new_lines) - 1, header_url)
+        # header_match = header_pattern.match(line)
+        # if header_match:
+        #     header_url = get_header_url(header_match, page_name)
+        #     new_lines.insert(len(new_lines) - 1, header_url)
 
         next_line_num += 1
 
+    return new_lines
+
+
+def replace_examples(lines):
+    new_lines = []
+    pattern = re.compile(r'```python\n"""\s*Плохо\s*"""\n(.*?)```.*?```python\n"""\s*Хорошо\s*"""\n(.*?)```', re.DOTALL)
+    text = "".join(lines)
+    matches = pattern.findall(text)
+    for bad, good in matches:
+        new_lines.append("> [!fail]\n> ```python")
+        new_lines.extend([f"> {line}" for line in bad.strip().split("\n")])
+        new_lines.append("> ```\n")
+
+        new_lines.append("> [!success]\n> ```python")
+        new_lines.extend([f"> {line}" for line in good.strip().split("\n")])
+        new_lines.append("> ```\n")
     return new_lines
 
 
@@ -142,7 +169,9 @@ def main():
     parser = create_parser()
     args = parser.parse_args()
 
-    md_paths = get_md_paths(args.path)
+    path = TEMPLATES_PATH if args.templates else args.path
+
+    md_paths = get_md_paths(path)
     for md_path in md_paths:
         rework_md_by_patterns(md_path)
 
@@ -155,7 +184,8 @@ def main():
             # lines = remove_above_pattern(base_lines)
             # lines = fix_wrong_labels(lines)
             # lines = renew_check_boxes(lines)
-            lines = renew_links(lines, md_path, page_name)
+            # lines = renew_links(lines, md_path, page_name)
+            lines = replace_examples(lines)
 
             with open(md_path, 'w', encoding='utf-8') as file:
                 file.writelines(lines)
