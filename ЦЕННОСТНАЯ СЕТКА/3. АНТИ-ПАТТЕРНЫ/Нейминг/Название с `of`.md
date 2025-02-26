@@ -1,70 +1,74 @@
+- [ ] Отметить
 ***
-## Использование `of` в названиях переменных, функций или классов
-- [ ] Анти-паттерн
 
 >[!quote] Описание
 _Названия переменных не должны быть слишком длинными или содержать излишнюю информацию, если того не требует контекст.
 Предлог `of` создаёт избыточность в названии._
 
 ***
-### `of` в названии переменной
-- [ ] Пример: `of` в названии переменной
+### Пример 1
 
-```python
-"""Плохо"""
-number_of_active_users = ...
+> [!fail]
+> ```python
+> number_of_active_users = ...
+> ```
 
+> [!success]
+> ```python
+> active_users_num = ...
+> ```
 
-"""Хорошо"""
-active_users_num = ...
-```
-
-[[SOURCE CODE PY]]
-
-[[SOURCE CODE PY#Бегло проследить поток исполнения программы]]
-
-***
-### `of` в названии функции
-- [ ] Пример: `of` в названии функции
-
-```python
-"""Плохо"""
-def get_info_of_user(user_id):
-    ...
-
-
-"""Хорошо"""
-def get_user_info(user_id):
-    ...
-```
-
-[[SOURCE CODE PY]]
-
-[[SOURCE CODE PY#Бегло проследить поток исполнения программы]]
+> [!example] Связанные кейсы
+>- Интерфейс: [[SOURCE CODE PY]]
+>	- Функция: [[SOURCE CODE PY#Бегло проследить поток исполнения программы|Бегло проследить поток исполнения программы]]
 
 ***
-### `of` в названии класса
-- [ ] Пример: `of` в названии класса
+### Пример 2
 
-```python
-"""Плохо"""
-class ProductOfCompany:
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
+> [!fail]
+> ```python
+> def get_info_of_user(user_id):
+>     ...
+> 
+> 
+> ```
 
+> [!success]
+> ```python
+> def get_user_info(user_id):
+>     ...
+> ```
 
-"""Хорошо"""
-class CompanyProduct:
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
-```
-
-[[SOURCE CODE PY]]
-
-[[SOURCE CODE PY#Бегло проследить поток исполнения программы]]
+> [!example] Связанные кейсы
+>- Интерфейс: [[SOURCE CODE PY]]
+>	- Функция: [[SOURCE CODE PY#Бегло проследить поток исполнения программы|Бегло проследить поток исполнения программы]]
 
 ***
-## [[Контакты]]
-Если не удалось найти ничего подходящего или есть идея по улучшению, [[Контакты|пиши сюда]].
+### Пример 3
+
+> [!fail]
+> ```python
+> class ProductOfCompany:
+>     def __init__(self, name, price):
+>         self.name = name
+>         self.price = price
+> 
+> 
+> ```
+
+> [!success]
+> ```python
+> class CompanyProduct:
+>     def __init__(self, name, price):
+>         self.name = name
+>         self.price = price
+> ```
+
+> [!example] Связанные кейсы
+>- Интерфейс: [[SOURCE CODE PY]]
+>	- Функция: [[SOURCE CODE PY#Бегло проследить поток исполнения программы|Бегло проследить поток исполнения программы]]
+
+***
+
+> [!info]
+> Если не удалось найти ничего подходящего или есть идея по улучшению, [[Контакты|пиши сюда]].

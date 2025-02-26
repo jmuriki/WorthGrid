@@ -1,6 +1,5 @@
+- [ ] Отметить
 ***
-# Использование нескольких `except` блоков для идентичной обработки разных исключений
-- [ ] Анти-паттерн: Использование нескольких `except` блоков для идентичной обработки разных исключений
 
 >[!quote] Описание
 _Если ошибки похожи, то лучше обрабатывать их в одном блоке except.
@@ -8,29 +7,30 @@ _Если ошибки похожи, то лучше обрабатывать и
 
 ***
 ### Копипаста в try-except
-- [ ] Пример: копипаста в try-except
 
-```python
-"""Плохо"""
-try:
-    function()
-except ValueError:
-    logging.error('Value error')
-except IndexError:
-    logging.error('Index error')
+> [!fail]
+> ```python
+> try:
+>     function()
+> except ValueError:
+>     logging.error('Value error')
+> except IndexError:
+>     logging.error('Index error')
+> ```
 
+> [!success]
+> ```python
+> try:
+>     function()
+> except (ValueError, IndexError) as e:
+>     logging.error(f'Error: {e}')
+> ```
 
-"""Хорошо"""
-try:
-    function()
-except (ValueError, IndexError) as e:
-    logging.error(f'Error: {e}')
-```
-
-[[SOURCE CODE PY]]
-
-[[SOURCE CODE PY#Бегло проследить поток исполнения программы]]
+> [!example] Связанные кейсы
+>- Интерфейс: [[SOURCE CODE PY]]
+>	- Функция: [[SOURCE CODE PY#Бегло проследить поток исполнения программы|Бегло проследить поток исполнения программы]]
 
 ***
-## [[Контакты]]
-Если не удалось найти ничего подходящего или есть идея по улучшению, [[Контакты|пиши сюда]].
+
+> [!info]
+> Если не удалось найти ничего подходящего или есть идея по улучшению, [[Контакты|пиши сюда]].

@@ -11,6 +11,7 @@ WORTH_GRID_PATH = os.path.join(SCRIPTS_DIR, '..', 'ЦЕННОСТНАЯ СЕТК
 TEMPLATES_PATH = os.path.join(SCRIPTS_DIR, '..', 'templates')
 ANTI_PATTERNS_FILENAME = 'АНТИ-ПАТТЕРНЫ'
 ANTI_PATTERNS_FOLDER_NAME = f'3. {ANTI_PATTERNS_FILENAME}'
+ANTI_PATTERNS_PATH = os.path.join(WORTH_GRID_PATH, ANTI_PATTERNS_FOLDER_NAME)
 SYMBOLS_TO_REMOVE_FROM_LINK = "\"!#$%&'()*+,./:;<=>?@\\^_`{}[]~"
 
 SUCCESS_SIGN = '\u2705'
@@ -22,6 +23,7 @@ def create_parser():
     parser = argparse.ArgumentParser(description='Скрипт для шаблонной правки файлов Ценностной Сетки.')
     parser.add_argument('-p', '--path', type=str, default=WORTH_GRID_PATH, help='Путь к директории с .md файлами.')
     parser.add_argument('-t', '--templates', action='store_true', help='Только шаблоны.')
+    parser.add_argument('-a', '--anti', action='store_true', help='Только Анти-паттерны.')
     return parser
 
 
@@ -151,18 +153,54 @@ def renew_links(lines, md_path, page_name):
 
 def replace_examples(lines):
     new_lines = []
-    pattern = re.compile(r'```python\n"""\s*Плохо\s*"""\n(.*?)```.*?```python\n"""\s*Хорошо\s*"""\n(.*?)```', re.DOTALL)
-    text = "".join(lines)
-    matches = pattern.findall(text)
-    for bad, good in matches:
-        new_lines.append("> [!fail]\n> ```python")
-        new_lines.extend([f"> {line}" for line in bad.strip().split("\n")])
-        new_lines.append("> ```\n")
 
-        new_lines.append("> [!success]\n> ```python")
-        new_lines.extend([f"> {line}" for line in good.strip().split("\n")])
-        new_lines.append("> ```\n")
+    bad_line_num = 0
+    good_line_num = 0
+
+    total_lines = len(lines)
+    next_line_num = 0
+    while next_line_num < total_lines:
+        line = lines[next_line_num]
+
+        if '> [!fail]' in line:
+            return lines
+        elif '```python' in line:
+            new_lines.append('> [!fail]\n')
+            new_lines.append(f'> {line}')
+        elif 'Плохо' in line:
+            bad_line_num = next_line_num
+        elif bad_line_num and 'Хорошо' not in line:
+            new_lines.append(f'> {line}')
+        elif 'Хорошо' in line:
+            bad_line_num = 0
+            new_lines.append('> ```\n\n')
+            good_line_num = next_line_num
+            new_lines.append('> [!success]\n')
+            new_lines.append('> ```python\n')
+        elif good_line_num and '```' not in line:
+            new_lines.append(f'> {line}')
+        elif good_line_num and '```' in line:
+            good_line_num = 0
+            new_lines.append(f'> {line}\n')
+        else:
+            new_lines.append(line)
+
+        next_line_num += 1
+
     return new_lines
+
+
+
+    #     matches = pattern.findall(text)
+    # for bad, good in matches:
+    #     new_lines.append("> [!fail]\n> ```python")
+    #     new_lines.extend([f"> {line}" for line in bad.strip().split("\n")])
+    #     new_lines.append("> ```\n")
+
+    #     new_lines.append("> [!success]\n> ```python")
+    #     new_lines.extend([f"> {line}" for line in good.strip().split("\n")])
+    #     new_lines.append("> ```\n")
+    # return new_lines
 
 
 def main():
@@ -170,6 +208,7 @@ def main():
     args = parser.parse_args()
 
     path = TEMPLATES_PATH if args.templates else args.path
+    path = ANTI_PATTERNS_PATH if args.anti else args.path
 
     md_paths = get_md_paths(path)
     for md_path in md_paths:
