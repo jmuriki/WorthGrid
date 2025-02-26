@@ -1,34 +1,19 @@
 ***
-```url
-github.com/jmuriki/WorthGrid/wiki/SOURCE-CODE-PY#интерфейс-исходный-код-python
-```
 # Интерфейс "Исходный код Python"
 - [ ] Вид Интерфейса: "Исходный код Python".
 
 ***
-```url
-github.com/jmuriki/WorthGrid/wiki/SOURCE-CODE-PY#пользователь-читатель-кода
-```
 # Пользователь: Читатель кода
 - [ ] Тип Пользователя: Читатель кода.
 
 ***
-```url
-github.com/jmuriki/WorthGrid/wiki/SOURCE-CODE-PY#чего-хочет-пользователь
-```
 # Чего хочет Пользователь?
 
 ***
-```url
-github.com/jmuriki/WorthGrid/wiki/SOURCE-CODE-PY#бегло-проследить-поток-исполнения-программы
-```
 ## Бегло проследить поток исполнения программы
 - [ ] Ключевая Функция: бегло проследить поток исполнения программы.
 
 ***
-```url
-github.com/jmuriki/WorthGrid/wiki/SOURCE-CODE-PY#без-спотыкания-и-застревания-в-анти-паттернах
-```
 ### Без спотыкания и застревания в Анти-паттернах
 - [ ] Типичная История: пользователь интерфейса "Исходный код Python" - читатель кода, хочет бегло проследить поток исполнения программы без спотыкания и цепляния за Анти-паттерны.
 
@@ -45,9 +30,6 @@ github.com/jmuriki/WorthGrid/wiki/SOURCE-CODE-PY#без-спотыкания-и-
 - [ ] Внимание не спотыкалось и не застревало в Анти-паттернах
 
 ***
-```url
-github.com/jmuriki/WorthGrid/wiki/SOURCE-CODE-PY#анти‐паттерны
-```
 # [[Анти‐паттерны]]
 
 ***
@@ -74,14 +56,8 @@ github.com/jmuriki/WorthGrid/wiki/SOURCE-CODE-PY#анти‐паттерны
 	- [ ] Анти-паттерн: [[try-except вместо suppress]]
 
 ***
-```url
-github.com/jmuriki/WorthGrid/wiki/SOURCE-CODE-PY#справка
-```
 # СПРАВКА
 
 ***
-```url
-github.com/jmuriki/WorthGrid/wiki/SOURCE-CODE-PY#контакты
-```
 ### [[Контакты]]
 Если не удалось найти ничего подходящего или есть идея по улучшению, [пиши сюда](https://github.com/jmuriki/WorthGrid/wiki/Контакты).
