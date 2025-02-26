@@ -162,3 +162,4 @@ cython_debug/
 # This project
 .DS_Store
 calls/
+WorthGrid.wiki/
