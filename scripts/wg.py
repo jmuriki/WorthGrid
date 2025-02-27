@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import re
 import argparse
 import subprocess
 
@@ -10,13 +11,12 @@ from datetime import datetime
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 WORTH_GRID_PATH = os.path.join(BASE_DIR, '..', 'ЦЕННОСТНАЯ СЕТКА')
 
-INTERFACE_LABEL = 'Вид Интерфейса'
 USER_LABEL = 'Тип Пользователя'
 FUNCTION_LABEL = 'Ключевая Функция'
 CASE_LABEL = 'Типичная История'
 ANTI_PATTERN_LABEL = 'Анти-паттерн'
 ANTI_PATTERNS_GROUP_LABEL = 'Группа Анти-паттернов'
-LABELS = [INTERFACE_LABEL, USER_LABEL, FUNCTION_LABEL, CASE_LABEL, ANTI_PATTERN_LABEL, ANTI_PATTERNS_GROUP_LABEL]
+LABELS = [USER_LABEL, FUNCTION_LABEL, CASE_LABEL, ANTI_PATTERN_LABEL, ANTI_PATTERNS_GROUP_LABEL]
 
 SUCCESS_SIGN = '\u2705'
 WARNING_SIGN = '\U000026A0\U0000FE0F'
@@ -28,7 +28,6 @@ def create_parser():
     parser.add_argument('-c', '--clear', action='store_true', help='Обнулить чек-боксы.')
     parser.add_argument('-d', '--detailed', action='store_true', help='Детализированный отчёт.')
     parser.add_argument('-e', '--erase', action='store_true', help='Стереть любые изменения, включая незапушенные коммиты.')
-    parser.add_argument('-l', '--links', action='store_true', help='Добавить ссылки в отчёт.')
     parser.add_argument('-n', '--name', type=str, default='ЦС_отчёт', help='Задать альтернативное название отчёта.')
     parser.add_argument('-p', '--preview', action='store_true', help='Вывести превью отчёта в консоль.')
     parser.add_argument('-u', '--update', action='store_true', help='Обновить репозиторий ЦС.')
@@ -101,10 +100,16 @@ def find_md_files():
 def get_interface_name(md_path):
     basename = os.path.basename(md_path)
     name, _ = os.path.splitext(basename)
-    return name
+    with open(md_path, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+    interface_pattern = re.compile(r'^##\s*.*Интерфейс.*$')
+    for line in lines:
+        interface_match = interface_pattern.match(line)
+        if interface_match:
+            return f'{name} - {line.replace('## 🖥️ ', '').strip()}'
 
 
-def get_report_lines(md_filepaths, is_detailed, with_links):
+def get_report_lines(md_filepaths, is_detailed):
     report_lines = []
 
     for md_path in md_filepaths:
@@ -120,8 +125,6 @@ def get_report_lines(md_filepaths, is_detailed, with_links):
         function_line_index = None
         user_line = ''
         user_line_index = None
-        # interface_line = ''
-        # interface_line_index = None
 
         for index, line in enumerate(lines):
 
@@ -140,25 +143,8 @@ def get_report_lines(md_filepaths, is_detailed, with_links):
                 function_line_index = None
                 user_line = line
                 user_line_index = index
-            # elif INTERFACE_LABEL in line:
-            #     case_line = ''
-            #     case_line_index = None
-            #     function_line = ''
-            #     function_line_index = None
-            #     user_line = ''
-            #     user_line_index = None
-            #     interface_line = line
-            #     interface_line_index = index
 
             if line.strip().startswith('- [x]'):
-
-                # if interface_line and '- [x]' not in interface_line:
-                #     checked_interface_line = interface_line.replace('- [ ]', '- [x]')
-                #     marked_lines.append(f'\n{checked_interface_line.strip()}')
-                #     new_lines[interface_line_index] = checked_interface_line
-
-                #     interface_line = None
-                #     interface_line_index = None
 
                 if user_line and '- [x]' not in user_line:
                     checked_user_line = user_line.replace('- [ ]', '- [x]')
@@ -207,9 +193,7 @@ def get_report_lines(md_filepaths, is_detailed, with_links):
 def refine_report_lines(report_lines):
     if report_lines:
         for index, line in enumerate(report_lines):
-            if INTERFACE_LABEL in line:
-                report_lines[index] = line
-            elif USER_LABEL in line:
+            if USER_LABEL in line:
                 report_lines[index] = f'    {line}'
             elif FUNCTION_LABEL in line:
                 report_lines[index] = f'        {line}'
@@ -261,7 +245,6 @@ def main():
     is_clear = args.clear
     is_detailed = args.detailed
     is_erase = args.erase
-    with_links = args.links
     report_name = args.name
     is_preview = args.preview
     is_update = args.update
@@ -272,7 +255,7 @@ def main():
         print(f'{WARNING_SIGN} Запустите скрипт с флагом "-u" для обновления.')
 
     md_filepaths = find_md_files()
-    report_lines = get_report_lines(md_filepaths, is_detailed, with_links)
+    report_lines = get_report_lines(md_filepaths, is_detailed)
 
     if report_lines and is_preview:
         print('\n'.join(report_lines))
