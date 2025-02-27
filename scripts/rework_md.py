@@ -47,11 +47,6 @@ def rework_md_by_patterns(md_path):
 
     new_content = content
 
-    # pattern = re.compile(r'```python\n"""\s*Плохо\s*"""\n(.*?)```.*?```python\n"""\s*Хорошо\s*"""\n(.*?)```', re.DOTALL)
-
-    # matches = pattern.findall(new_content)
-
-
     # new_content = new_content.replace('# [[Контакты]]', '## [[Контакты]]')
 
     # new_content = new_content.replace('[пиши сюда](https://github.com/jmuriki/WorthGrid/wiki/Контакты)', '[[Контакты|пиши сюда]]')
@@ -153,45 +148,49 @@ def renew_links(lines, md_path, page_name):
     return new_lines
 
 
-def replace_patterns(lines):
+def insert_example_sign(lines):
     new_lines = []
-
     for line in lines:
         line = line.replace('# Пример', '# 💡 Пример')
         new_lines.append(line)
+    return new_lines
 
-    # bad_line_num = 0
-    # good_line_num = 0
 
-    # total_lines = len(lines)
-    # next_line_num = 0
-    # while next_line_num < total_lines:
-    #     line = lines[next_line_num]
+def replace_patterns(lines):
+    new_lines = []
 
-    #     if '> [!fail]' in line:
-    #         return lines
-    #     elif '```python' in line:
-    #         new_lines.append('> [!fail]\n')
-    #         new_lines.append(f'> {line}')
-    #     elif 'Плохо' in line:
-    #         bad_line_num = next_line_num
-    #     elif bad_line_num and 'Хорошо' not in line:
-    #         new_lines.append(f'> {line}')
-    #     elif 'Хорошо' in line:
-    #         bad_line_num = 0
-    #         new_lines.append('> ```\n\n')
-    #         good_line_num = next_line_num
-    #         new_lines.append('> [!success]\n')
-    #         new_lines.append('> ```python\n')
-    #     elif good_line_num and '```' not in line:
-    #         new_lines.append(f'> {line}')
-    #     elif good_line_num and '```' in line:
-    #         good_line_num = 0
-    #         new_lines.append(f'> {line}\n')
-    #     else:
-    #         new_lines.append(line)
+    bad_line_num = 0
+    good_line_num = 0
 
-    #     next_line_num += 1
+    total_lines = len(lines)
+    next_line_num = 0
+    while next_line_num < total_lines:
+        line = lines[next_line_num]
+
+        if '> [!fail]' in line:
+            return lines
+        elif '```python' in line:
+            new_lines.append('> [!fail]\n')
+            new_lines.append(f'> {line}')
+        elif 'Плохо' in line:
+            bad_line_num = next_line_num
+        elif bad_line_num and 'Хорошо' not in line:
+            new_lines.append(f'> {line}')
+        elif 'Хорошо' in line:
+            bad_line_num = 0
+            new_lines.append('> ```\n\n')
+            good_line_num = next_line_num
+            new_lines.append('> [!success]\n')
+            new_lines.append('> ```python\n')
+        elif good_line_num and '```' not in line:
+            new_lines.append(f'> {line}')
+        elif good_line_num and '```' in line:
+            good_line_num = 0
+            new_lines.append(f'> {line}\n')
+        else:
+            new_lines.append(line)
+
+        next_line_num += 1
 
     return new_lines
 
@@ -206,7 +205,7 @@ def main():
 
     md_paths = get_md_paths(path)
     for md_path in md_paths:
-        rework_md_by_patterns(md_path)
+        # rework_md_by_patterns(md_path)
 
         with open(md_path, 'r', encoding='utf-8') as file:
             base_lines = file.readlines()
@@ -218,7 +217,8 @@ def main():
             # lines = fix_wrong_labels(lines)
             # lines = renew_check_boxes(lines)
             # lines = renew_links(lines, md_path, page_name)
-            lines = replace_patterns(lines)
+            # lines = insert_example_sign(lines)
+            # lines = replace_patterns(lines)
 
             with open(md_path, 'w', encoding='utf-8') as file:
                 file.writelines(lines)
