@@ -10,11 +10,11 @@ from datetime import datetime
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 WORTH_GRID_PATH = os.path.join(BASE_DIR, '..', 'ЦЕННОСТНАЯ СЕТКА')
 
-INTERFACE_LABEL = 'Вид Интерфейса:'
-USER_LABEL = 'Тип Пользователя:'
-FUNCTION_LABEL = 'Ключевая Функция:'
-CASE_LABEL = 'Типичная История:'
-ANTI_PATTERN_LABEL = 'Анти-паттерн:'
+INTERFACE_LABEL = 'Вид Интерфейса'
+USER_LABEL = 'Тип Пользователя'
+FUNCTION_LABEL = 'Ключевая Функция'
+CASE_LABEL = 'Типичная История'
+ANTI_PATTERN_LABEL = 'Анти-паттерн'
 ANTI_PATTERNS_GROUP_LABEL = 'Группа Анти-паттернов'
 LABELS = [INTERFACE_LABEL, USER_LABEL, FUNCTION_LABEL, CASE_LABEL, ANTI_PATTERN_LABEL, ANTI_PATTERNS_GROUP_LABEL]
 
@@ -35,7 +35,7 @@ def create_parser():
     return parser
 
 
-def check_repo_updates(remote='origin', branch='master'):
+def check_repo_updates(remote='origin', branch='main'):
     try:
         subprocess.run(['git', 'fetch', remote], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
@@ -47,7 +47,7 @@ def check_repo_updates(remote='origin', branch='master'):
 
     try:
         commits_to_pull = int(new_commits)
-    except ValueError:
+    except (UnboundLocalError, ValueError):
         commits_to_pull = 0
 
     if commits_to_pull:
@@ -58,7 +58,7 @@ def check_repo_updates(remote='origin', branch='master'):
     return msg
 
 
-def get_repo_updates(remote='origin', branch='master'):
+def get_repo_updates(remote='origin', branch='main'):
     try:
         # Подсчитываем количество коммитов, которые есть в локальном репозитории, но не запушены в удалённый
         ahead_commits_cmd = ['git', 'rev-list', '--count', f'{remote}/{branch}..{branch}']
@@ -120,10 +120,8 @@ def get_report_lines(md_filepaths, is_detailed, with_links):
         function_line_index = None
         user_line = ''
         user_line_index = None
-        interface_line = ''
-        interface_line_index = None
-        # anti_pattern_line = ''
-        # anti_pattern_line_index = None
+        # interface_line = ''
+        # interface_line_index = None
 
         for index, line in enumerate(lines):
 
@@ -142,25 +140,25 @@ def get_report_lines(md_filepaths, is_detailed, with_links):
                 function_line_index = None
                 user_line = line
                 user_line_index = index
-            elif INTERFACE_LABEL in line:
-                case_line = ''
-                case_line_index = None
-                function_line = ''
-                function_line_index = None
-                user_line = ''
-                user_line_index = None
-                interface_line = line
-                interface_line_index = index
+            # elif INTERFACE_LABEL in line:
+            #     case_line = ''
+            #     case_line_index = None
+            #     function_line = ''
+            #     function_line_index = None
+            #     user_line = ''
+            #     user_line_index = None
+            #     interface_line = line
+            #     interface_line_index = index
 
             if line.strip().startswith('- [x]'):
 
-                if interface_line and '- [x]' not in interface_line:
-                    checked_interface_line = interface_line.replace('- [ ]', '- [x]')
-                    marked_lines.append(f'\n{checked_interface_line.strip()}')
-                    new_lines[interface_line_index] = checked_interface_line
+                # if interface_line and '- [x]' not in interface_line:
+                #     checked_interface_line = interface_line.replace('- [ ]', '- [x]')
+                #     marked_lines.append(f'\n{checked_interface_line.strip()}')
+                #     new_lines[interface_line_index] = checked_interface_line
 
-                    interface_line = None
-                    interface_line_index = None
+                #     interface_line = None
+                #     interface_line_index = None
 
                 if user_line and '- [x]' not in user_line:
                     checked_user_line = user_line.replace('- [ ]', '- [x]')
@@ -238,7 +236,7 @@ def create_report(marked_lines, name):
     return report_file_path
 
 
-def erase_changes(remote='origin', branch='master'):
+def erase_changes(remote='origin', branch='main'):
     try:
         subprocess.run(['git', 'reset', '--hard', f'{remote}/{branch}'], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         msg = f'{SUCCESS_SIGN} Все изменения в репозитории сброшены.'
