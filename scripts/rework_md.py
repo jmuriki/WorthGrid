@@ -224,7 +224,7 @@ def main():
             # lines = fix_wrong_labels(lines)
             # lines = renew_check_boxes(lines)
             # lines = renew_links(lines, md_path, page_name)
-            lines = replace_examples(lines)
+            # lines = replace_examples(lines)
 
             with open(md_path, 'w', encoding='utf-8') as file:
                 file.writelines(lines)
