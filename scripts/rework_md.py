@@ -153,56 +153,46 @@ def renew_links(lines, md_path, page_name):
     return new_lines
 
 
-def replace_examples(lines):
+def replace_patterns(lines):
     new_lines = []
 
-    bad_line_num = 0
-    good_line_num = 0
+    for line in lines:
+        line = line.replace('# Пример', '# 💡 Пример')
 
-    total_lines = len(lines)
-    next_line_num = 0
-    while next_line_num < total_lines:
-        line = lines[next_line_num]
+    # bad_line_num = 0
+    # good_line_num = 0
 
-        if '> [!fail]' in line:
-            return lines
-        elif '```python' in line:
-            new_lines.append('> [!fail]\n')
-            new_lines.append(f'> {line}')
-        elif 'Плохо' in line:
-            bad_line_num = next_line_num
-        elif bad_line_num and 'Хорошо' not in line:
-            new_lines.append(f'> {line}')
-        elif 'Хорошо' in line:
-            bad_line_num = 0
-            new_lines.append('> ```\n\n')
-            good_line_num = next_line_num
-            new_lines.append('> [!success]\n')
-            new_lines.append('> ```python\n')
-        elif good_line_num and '```' not in line:
-            new_lines.append(f'> {line}')
-        elif good_line_num and '```' in line:
-            good_line_num = 0
-            new_lines.append(f'> {line}\n')
-        else:
-            new_lines.append(line)
+    # total_lines = len(lines)
+    # next_line_num = 0
+    # while next_line_num < total_lines:
+    #     line = lines[next_line_num]
 
-        next_line_num += 1
+    #     if '> [!fail]' in line:
+    #         return lines
+    #     elif '```python' in line:
+    #         new_lines.append('> [!fail]\n')
+    #         new_lines.append(f'> {line}')
+    #     elif 'Плохо' in line:
+    #         bad_line_num = next_line_num
+    #     elif bad_line_num and 'Хорошо' not in line:
+    #         new_lines.append(f'> {line}')
+    #     elif 'Хорошо' in line:
+    #         bad_line_num = 0
+    #         new_lines.append('> ```\n\n')
+    #         good_line_num = next_line_num
+    #         new_lines.append('> [!success]\n')
+    #         new_lines.append('> ```python\n')
+    #     elif good_line_num and '```' not in line:
+    #         new_lines.append(f'> {line}')
+    #     elif good_line_num and '```' in line:
+    #         good_line_num = 0
+    #         new_lines.append(f'> {line}\n')
+    #     else:
+    #         new_lines.append(line)
+
+    #     next_line_num += 1
 
     return new_lines
-
-
-
-    #     matches = pattern.findall(text)
-    # for bad, good in matches:
-    #     new_lines.append("> [!fail]\n> ```python")
-    #     new_lines.extend([f"> {line}" for line in bad.strip().split("\n")])
-    #     new_lines.append("> ```\n")
-
-    #     new_lines.append("> [!success]\n> ```python")
-    #     new_lines.extend([f"> {line}" for line in good.strip().split("\n")])
-    #     new_lines.append("> ```\n")
-    # return new_lines
 
 
 def main():
@@ -227,7 +217,7 @@ def main():
             # lines = fix_wrong_labels(lines)
             # lines = renew_check_boxes(lines)
             # lines = renew_links(lines, md_path, page_name)
-            # lines = replace_examples(lines)
+            lines = replace_patterns(lines)
 
             with open(md_path, 'w', encoding='utf-8') as file:
                 file.writelines(lines)
