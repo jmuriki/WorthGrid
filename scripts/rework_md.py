@@ -7,7 +7,7 @@ import argparse
 
 WIKI_BASE_URL = 'github.com/jmuriki/WorthGrid/wiki/'
 SCRIPTS_DIR = os.path.abspath(os.path.dirname(__file__))
-BASE_DIR = os.path.join(SCRIPTS_DIR, '..')
+BASE_PATH = os.path.join(SCRIPTS_DIR, '..')
 WORTH_GRID_PATH = os.path.join(SCRIPTS_DIR, '..', 'ЦЕННОСТНАЯ СЕТКА')
 TEMPLATES_PATH = os.path.join(SCRIPTS_DIR, '..', 'templates')
 ANTI_PATTERNS_FILENAME = 'АНТИ-ПАТТЕРНЫ'
@@ -158,6 +158,7 @@ def replace_patterns(lines):
 
     for line in lines:
         line = line.replace('# Пример', '# 💡 Пример')
+        new_lines.append(line)
 
     # bad_line_num = 0
     # good_line_num = 0
