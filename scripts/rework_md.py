@@ -7,6 +7,7 @@ import argparse
 
 WIKI_BASE_URL = 'github.com/jmuriki/WorthGrid/wiki/'
 SCRIPTS_DIR = os.path.abspath(os.path.dirname(__file__))
+BASE_DIR = os.path.join(SCRIPTS_DIR, '..')
 WORTH_GRID_PATH = os.path.join(SCRIPTS_DIR, '..', 'ЦЕННОСТНАЯ СЕТКА')
 TEMPLATES_PATH = os.path.join(SCRIPTS_DIR, '..', 'templates')
 ANTI_PATTERNS_FILENAME = 'АНТИ-ПАТТЕРНЫ'
@@ -21,9 +22,10 @@ CANCEL_SIGN = '\U0001F6AB'
 
 def create_parser():
     parser = argparse.ArgumentParser(description='Скрипт для шаблонной правки файлов Ценностной Сетки.')
+    parser.add_argument('-a', '--anti', action='store_true', help='Только Анти-паттерны.')
+    parser.add_argument('-b', '--base', action='store_true', help='Все .md файлы в репозитории')
     parser.add_argument('-p', '--path', type=str, default=WORTH_GRID_PATH, help='Путь к директории с .md файлами.')
     parser.add_argument('-t', '--templates', action='store_true', help='Только шаблоны.')
-    parser.add_argument('-a', '--anti', action='store_true', help='Только Анти-паттерны.')
     return parser
 
 
@@ -207,8 +209,9 @@ def main():
     parser = create_parser()
     args = parser.parse_args()
 
-    path = TEMPLATES_PATH if args.templates else args.path
     path = ANTI_PATTERNS_PATH if args.anti else args.path
+    path = BASE_PATH if args.base else args.path
+    path = TEMPLATES_PATH if args.templates else args.path
 
     md_paths = get_md_paths(path)
     for md_path in md_paths:

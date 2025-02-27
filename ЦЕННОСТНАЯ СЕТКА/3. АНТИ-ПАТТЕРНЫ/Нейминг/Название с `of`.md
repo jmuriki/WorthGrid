@@ -1,4 +1,3 @@
-- [ ] Отметить
 ***
 
 >[!quote] Описание
@@ -29,8 +28,6 @@ _Названия переменных не должны быть слишком
 > ```python
 > def get_info_of_user(user_id):
 >     ...
-> 
-> 
 > ```
 
 > [!success]
@@ -52,8 +49,6 @@ _Названия переменных не должны быть слишком
 >     def __init__(self, name, price):
 >         self.name = name
 >         self.price = price
-> 
-> 
 > ```
 
 > [!success]
