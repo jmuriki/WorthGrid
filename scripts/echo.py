@@ -38,8 +38,9 @@ def main():
         return
 
     echo = ''
-    for num in range(1, repeat + 1):
-        echo += text + ('.' * 3 * num)
+    pause = '...'
+    for repeat_num in range(1, repeat + 1):
+        echo += text + (pause * repeat_num)
 
     print(echo)
 
