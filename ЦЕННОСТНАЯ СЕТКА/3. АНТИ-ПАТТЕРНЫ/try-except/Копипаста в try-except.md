@@ -7,23 +7,23 @@ _Если ошибки похожи, то лучше обрабатывать и
 ***
 ### 💡 Пример
 
-Плохо:
-> ```python
-> try:
->     function()
-> except ValueError:
->     logging.error('Value error')
-> except IndexError:
->     logging.error('Index error')
-> ```
+**Плохо:**
+```python
+try:
+    function()
+except ValueError:
+    logging.error('Value error')
+except IndexError:
+    logging.error('Index error')
+```
 
-Хорошо:
-> ```python
-> try:
->     function()
-> except (ValueError, IndexError) as e:
->     logging.error(f'Error: {e}')
-> ```
+**Хорошо:**
+```python
+try:
+    function()
+except (ValueError, IndexError) as e:
+    logging.error(f'Error: {e}')
+```
 
 > [!example] Связанные кейсы
 > - Интерфейс: [[SOURCE CODE PY]]

@@ -7,15 +7,15 @@ _Названия переменных не должны быть слишком
 ***
 ### 💡 Пример 1
 
-> [!fail]
-> ```python
-> number_of_active_users = ...
-> ```
+**Плохо:**
+```python
+number_of_active_users = ...
+```
 
-> [!success]
-> ```python
-> active_users_num = ...
-> ```
+**Хорошо:**
+```python
+active_users_num = ...
+```
 
 > [!example] Связанные кейсы
 >- Интерфейс: [[SOURCE CODE PY]]
@@ -24,17 +24,17 @@ _Названия переменных не должны быть слишком
 ***
 ### 💡 Пример 2
 
-> [!fail]
-> ```python
-> def get_info_of_user(user_id):
->     ...
-> ```
+**Плохо:**
+```python
+def get_info_of_user(user_id):
+    ...
+```
 
-> [!success]
-> ```python
-> def get_user_info(user_id):
->     ...
-> ```
+**Хорошо:**
+```python
+def get_user_info(user_id):
+    ...
+```
 
 > [!example] Связанные кейсы
 >- Интерфейс: [[SOURCE CODE PY]]
@@ -43,21 +43,21 @@ _Названия переменных не должны быть слишком
 ***
 ### 💡 Пример 3
 
-> [!fail]
-> ```python
-> class ProductOfCompany:
->     def __init__(self, name, price):
->         self.name = name
->         self.price = price
-> ```
+**Плохо:**
+```python
+class ProductOfCompany:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+```
 
-> [!success]
-> ```python
-> class CompanyProduct:
->     def __init__(self, name, price):
->         self.name = name
->         self.price = price
-> ```
+**Хорошо:**
+```python
+class CompanyProduct:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+```
 
 > [!example] Связанные кейсы
 >- Интерфейс: [[SOURCE CODE PY]]

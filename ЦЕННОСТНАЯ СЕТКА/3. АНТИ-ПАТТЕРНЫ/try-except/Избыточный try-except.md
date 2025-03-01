@@ -6,56 +6,56 @@ _Использовать try-except и исключения следует в �
 ***
 ### 💡 Пример 1
 
-Плохо:
-> ```python
-> try:
->     value = my_dict['key']
-> except KeyError:
->     value = None
-> ```
+**Плохо:**
+```python
+try:
+    value = my_dict['key']
+except KeyError:
+    value = None
+```
 
-Хорошо:
-> ```python
-> value = my_dict.get('key')
-> ```
+**Хорошо:**
+```python
+value = my_dict.get('key')
+```
 
 ***
 ### 💡 Пример 2
 
-Плохо:
-> ```python
-> capitals = {
->   'Россия': 'Москва',
->    'Англия': 'Лондон',
-> }
-> 
-> 
-> def get_capitals(country):
->     try:
->         capital = capitals[country]
->     except KeyError:
->         capital = None
->     finally:
->         return capital
-> 
-> 
-> print(get_capitals('Китай'))
-> ```
+**Плохо:**
+```python
+capitals = {
+  'Россия': 'Москва',
+   'Англия': 'Лондон',
+}
 
-Хорошо:
-> ```python
-> capitals = {
->   'Россия': 'Москва',
->   'Англия': 'Лондон',
-> }
-> 
-> 
-> def get_capitals(country):
->    return capitals.get(country)
-> 
-> 
-> print(get_capitals('Китай'))
-> ```
+
+def get_capitals(country):
+    try:
+        capital = capitals[country]
+    except KeyError:
+        capital = None
+    finally:
+        return capital
+
+
+print(get_capitals('Китай'))
+```
+
+**Хорошо:**
+```python
+capitals = {
+  'Россия': 'Москва',
+  'Англия': 'Лондон',
+}
+
+
+def get_capitals(country):
+   return capitals.get(country)
+
+
+print(get_capitals('Китай'))
+```
 
 > [!example] Связанные кейсы
 > - Интерфейс: [[SOURCE CODE PY]]
@@ -64,30 +64,30 @@ _Использовать try-except и исключения следует в �
 ***
 ### 💡 Пример 3
 
-Плохо:
-> ```python
-> def calculate(num1, num2):
-> 	try:
-> 		result = num1 + num2
-> 		return result
-> 	except TypeError:
-> 		logging.warning('Ошибка: аргументы должны быть числами.')
-> 
-> 
-> print(calculate(1, '2'))
-> ```
+**Плохо:**
+```python
+def calculate(num1, num2):
+	try:
+		result = num1 + num2
+		return result
+	except TypeError:
+		logging.warning('Ошибка: аргументы должны быть числами.')
 
-Хорошо:
-> ```python
-> def calculate(num1, num2):
->     if isinstance(num1, (int, float)) and isinstance(num2, (int, float)):
->         result = num1 + num2
->         return result
->     logging.warning('Ошибка: аргументы должны быть числами.')
-> 
-> 
-> print(calculate(1, '2'))
-> ```
+
+print(calculate(1, '2'))
+```
+
+**Хорошо:**
+```python
+def calculate(num1, num2):
+    if isinstance(num1, (int, float)) and isinstance(num2, (int, float)):
+        result = num1 + num2
+        return result
+    logging.warning('Ошибка: аргументы должны быть числами.')
+
+
+print(calculate(1, '2'))
+```
 
 > [!example] Связанные кейсы
 > - Интерфейс: [[SOURCE CODE PY]]

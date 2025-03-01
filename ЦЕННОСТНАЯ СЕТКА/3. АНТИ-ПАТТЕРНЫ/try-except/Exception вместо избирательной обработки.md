@@ -8,23 +8,23 @@ _Не рекомендуется использовать базовое иск�
 ***
 ### 💡 Пример 1
 
-Плохо:
-> ```python
-> try:
->     function()
-> except Exception as e:
->    logging.error('Произошла ошибка!')
-> ```
+**Плохо:**
+```python
+try:
+    function()
+except Exception as e:
+   logging.error('Произошла ошибка!')
+```
 
-Хорошо:
-> ```python
-> try:
->     function()
-> except FileNotFoundError:
->     logging.error('Файл не найден!')
-> except PermissionError:
->     logging.error('Нет прав доступа к файлу!')
-> ```
+**Хорошо:**
+```python
+try:
+    function()
+except FileNotFoundError:
+    logging.error('Файл не найден!')
+except PermissionError:
+    logging.error('Нет прав доступа к файлу!')
+```
 
 > [!example] Связанные кейсы
 > - Интерфейс: [[SOURCE CODE PY]]
@@ -33,23 +33,25 @@ _Не рекомендуется использовать базовое иск�
 ***
 ### 💡 Пример 2
 
-> ```python
-> try:
->     function()
-> except Exception as e:
->    logging.error('Произошла ошибка!')
->```
+**Плохо:**
+```python
+try:
+    function()
+except Exception as e:
+   logging.error('Произошла ошибка!')
+```
 
-> ```python
-> try:
->     function()
-> except FileNotFoundError:
->     logging.error('Файл не найден!')
-> except PermissionError:
->     logging.error('Нет прав доступа к файлу!')
-> except Exception as e:
->    logging.error(f'Произошла ошибка: {e}.')
-> ```
+**Хорошо:**
+```python
+try:
+    function()
+except FileNotFoundError:
+    logging.error('Файл не найден!')
+except PermissionError:
+    logging.error('Нет прав доступа к файлу!')
+except Exception as e:
+   logging.error(f'Произошла ошибка: {e}.')
+```
 
 > [!example] Связанные кейсы
 > - Интерфейс: [[SOURCE CODE PY]]

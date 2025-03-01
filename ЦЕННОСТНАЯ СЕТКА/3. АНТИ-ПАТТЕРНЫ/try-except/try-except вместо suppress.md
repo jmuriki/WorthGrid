@@ -7,21 +7,21 @@ _Иногда требуется игнорировать исключение.
 ***
 ### 💡 Пример 1
 
-Плохо:
-> ```python
-> try:
->     function()
-> except UnimportantError:
->     pass
-> ```
+**Плохо:**
+```python
+try:
+    function()
+except UnimportantError:
+    pass
+```
 
-Хорошо:
-> ```python
-> from contextlib import suppress
-> 
-> with suppress(UnimportantError):
->     function()
-> ```
+**Хорошо:**
+```python
+from contextlib import suppress
+
+with suppress(UnimportantError):
+    function()
+```
 
 > [!example] Связанные кейсы
 > - Интерфейс: [[SOURCE CODE PY]]
@@ -30,21 +30,21 @@ _Иногда требуется игнорировать исключение.
 ***
 ### 💡 Пример 2
 
-Плохо:
-> ```python
-> try:
->     function()
-> except UnimportantError:
->     continue
-> ```
+**Плохо:**
+```python
+try:
+    function()
+except UnimportantError:
+    continue
+```
 
-Хорошо:
-> ```python
-> from contextlib import suppress
-> 
-> with suppress(UnimportantError):
->     function()
-> ```
+**Хорошо:**
+```python
+from contextlib import suppress
+
+with suppress(UnimportantError):
+    function()
+```
 
 > [!example] Связанные кейсы
 > - Интерфейс: [[SOURCE CODE PY]]

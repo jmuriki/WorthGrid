@@ -6,13 +6,13 @@ import argparse
 
 
 WIKI_BASE_URL = 'github.com/jmuriki/WorthGrid/wiki/'
-SCRIPTS_DIR = os.path.abspath(os.path.dirname(__file__))
-BASE_PATH = os.path.join(SCRIPTS_DIR, '..')
-WORTH_GRID_PATH = os.path.join(SCRIPTS_DIR, '..', 'ЦЕННОСТНАЯ СЕТКА')
-TEMPLATES_PATH = os.path.join(SCRIPTS_DIR, '..', 'templates')
-ANTI_PATTERNS_FILENAME = 'АНТИ-ПАТТЕРНЫ'
-ANTI_PATTERNS_FOLDER_NAME = f'3. {ANTI_PATTERNS_FILENAME}'
-ANTI_PATTERNS_PATH = os.path.join(WORTH_GRID_PATH, ANTI_PATTERNS_FOLDER_NAME)
+
+SCRIPTS_PATH = os.path.abspath(os.path.dirname(__file__))
+BASE_PATH = os.path.join(SCRIPTS_PATH, '..')
+WORTH_GRID_PATH = os.path.join(SCRIPTS_PATH, '..', 'ЦЕННОСТНАЯ СЕТКА')
+TEMPLATES_PATH = os.path.join(SCRIPTS_PATH, '..', 'templates')
+ANTI_PATTERNS_PATH = os.path.join(WORTH_GRID_PATH, '3. АНТИ-ПАТТЕРНЫ')
+
 SYMBOLS_TO_REMOVE_FROM_LINK = "\"!#$%&'()*+,./:;<=>?@\\^_`{}[]~"
 
 SUCCESS_SIGN = '\u2705'
@@ -22,10 +22,7 @@ CANCEL_SIGN = '\U0001F6AB'
 
 def create_parser():
     parser = argparse.ArgumentParser(description='Скрипт для шаблонной правки файлов Ценностной Сетки.')
-    parser.add_argument('-a', '--anti', action='store_true', help='Только Анти-паттерны.')
-    parser.add_argument('-b', '--base', action='store_true', help='Все .md файлы в репозитории')
     parser.add_argument('-p', '--path', type=str, default=WORTH_GRID_PATH, help='Путь к директории с .md файлами.')
-    parser.add_argument('-t', '--templates', action='store_true', help='Только шаблоны.')
     return parser
 
 
@@ -87,8 +84,9 @@ def remove_patterns(lines):
 
     is_example = False
     for line in lines:
-        if '> [!quote] Плохо' in line or '> [!quote] Хорошо' in line:
-            continue
+        line = line.replace('[!fail]', '**Плохо:**').replace('[!success]', '**Хорошо:**')
+        if '> [!quote]' in line:
+            line = line.replace('> [!quote] Плохо', '**Плохо:**').replace('> [!quote] Хорошо', '**Хорошо:**')
         elif '> [!example] Связанные кейсы' in line:
             is_example = False
         if 'Пример' in line or is_example is True:
@@ -212,11 +210,8 @@ def main():
     parser = create_parser()
     args = parser.parse_args()
 
-    path = ANTI_PATTERNS_PATH if args.anti else args.path
-    path = BASE_PATH if args.base else args.path
-    path = TEMPLATES_PATH if args.templates else args.path
-
-    md_paths = get_md_paths(path)
+    md_paths = get_md_paths(args.path)
+    # md_paths = get_md_paths(ANTI_PATTERNS_PATH)
     for md_path in md_paths:
         # rework_md_by_patterns(md_path)
 
