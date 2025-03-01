@@ -76,13 +76,26 @@ def get_page_name(md_path):
     return page_name
 
 
-def remove_above_pattern(lines):
-    pattern = re.compile(r'\*\*\*')
-    for index, line in enumerate(lines):
-        match = pattern.search(line)
-        if match:
-            return lines[index:]
-    return lines
+def remove_patterns(lines):
+    new_lines = []
+    # pattern = re.compile(r'\*\*\*')
+    # for index, line in enumerate(lines):
+    #     match = pattern.search(line)
+    #     if match:
+    #         new_lines = lines[index:]
+    #         return new_lines
+
+    is_example = False
+    for line in lines:
+        if '> [!quote] Плохо' in line or '> [!quote] Хорошо' in line:
+            continue
+        elif '> [!example] Связанные кейсы' in line:
+            is_example = False
+        if 'Пример' in line or is_example is True:
+            is_example = True
+            line = line.replace('> ', '').replace('>', '')
+        new_lines.append(line)
+    return new_lines
 
 
 def fix_wrong_labels(lines):
@@ -213,7 +226,7 @@ def main():
         if base_lines:
             lines = base_lines.copy()
             page_name = get_page_name(md_path)
-            # lines = remove_above_pattern(base_lines)
+            # lines = remove_patterns(base_lines)
             # lines = fix_wrong_labels(lines)
             # lines = renew_check_boxes(lines)
             # lines = renew_links(lines, md_path, page_name)
