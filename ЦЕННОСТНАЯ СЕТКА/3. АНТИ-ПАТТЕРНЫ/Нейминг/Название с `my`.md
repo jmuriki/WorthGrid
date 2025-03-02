@@ -1,8 +1,7 @@
 ***
 
->[!quote] Описание
-_Неправильный порядок слов усложняет чтение.
-Ключевое слово должно располагаться в конце названия._
+> [!cite] Описание
+>_Местоимение `my` является излишним и способно больше запутать, чем помочь понять код._
 
 ***
 ### 💡 Пример 1
@@ -10,12 +9,14 @@ _Неправильный порядок слов усложняет чтени�
 
 **Плохо:**
 ```python
-num_active_users = ...
+with open(file_path, "w") as my_file:
+    ...
 ```
 
 **Хорошо:**
 ```python
-active_users_num = ...
+with open(file_path, "w") as file:
+    ...
 ```
 
 ***
@@ -24,14 +25,22 @@ active_users_num = ...
 
 **Плохо:**
 ```python
-def get_info_user(user_id):
-    ...
+from environs import Env
+
+def main():
+    env = Env()
+    env.read_env()
+    my_vk_access_token =  env.str('VK_ACCESS_TOKEN')
 ```
 
 **Хорошо:**
 ```python
-def get_user_info(user_id):
-    ...
+from environs import Env
+
+def main():
+    env = Env()
+    env.read_env()
+    vk_access_token =  env.str('VK_ACCESS_TOKEN')
 ```
 
 ***
@@ -40,22 +49,14 @@ def get_user_info(user_id):
 
 **Плохо:**
 ```python
-class ConverterCurrency:
-    def __init__(self, exchange_rate):
-        self.exchange_rate = exchange_rate
-
-    def convert_amount(self, amount):
-        return amount * self.exchange_rate
+def get_my_user_info(user_id):
+    ...
 ```
 
 **Хорошо:**
 ```python
-class CurrencyConverter:
-    def __init__(self, exchange_rate):
-        self.exchange_rate = exchange_rate
-
-    def convert_amount(self, amount):
-        return amount * self.exchange_rate
+def get_user_info(user_id):
+    ...
 ```
 
 ***
