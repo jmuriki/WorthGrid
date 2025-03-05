@@ -10,14 +10,14 @@ _Использовать try-except и исключения следует в �
 **Плохо:**
 ```python
 try:
-    value = my_dict['key']
+    value = collection['key']
 except KeyError:
     value = None
 ```
 
 **Хорошо:**
 ```python
-value = my_dict.get('key')
+value = collection.get('key')
 ```
 
 ***

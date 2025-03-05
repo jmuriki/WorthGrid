@@ -12,15 +12,15 @@ _Не рекомендуется использовать базовое иск�
 **Плохо:**
 ```python
 try:
-    function()
+    do_something()
 except Exception as e:
-   logging.error('Произошла ошибка!')
+   logging.error('Произошла ошибка')
 ```
 
 **Хорошо:**
 ```python
 try:
-    function()
+    do_something()
 except FileNotFoundError:
     logging.error('Файл не найден!')
 except PermissionError:

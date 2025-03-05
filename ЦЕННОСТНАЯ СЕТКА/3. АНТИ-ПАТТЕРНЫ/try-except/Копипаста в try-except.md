@@ -11,7 +11,7 @@ _Избегайте использования нескольких `except` б�
 **Плохо:**
 ```python
 try:
-    function()
+    do_something()
 except ValueError:
     logging.error('Value error')
 except IndexError:
@@ -21,7 +21,7 @@ except IndexError:
 **Хорошо:**
 ```python
 try:
-    function()
+    do_something()
 except (ValueError, IndexError) as e:
     logging.error(f'Error: {e}')
 ```
