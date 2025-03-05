@@ -11,12 +11,12 @@ from datetime import datetime
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 WORTH_GRID_PATH = os.path.join(BASE_DIR, '..', 'ЦЕННОСТНАЯ СЕТКА')
 
+INTERFACE_LABEL = '## 🖥️'
 USER_LABEL = 'Тип Пользователя'
 FUNCTION_LABEL = 'Ключевая Функция'
-CASE_LABEL = 'Типичная История'
-ANTI_PATTERN_LABEL = 'Анти-паттерн'
-ANTI_PATTERNS_GROUP_LABEL = 'Группа Анти-паттернов'
-LABELS = [USER_LABEL, FUNCTION_LABEL, CASE_LABEL, ANTI_PATTERN_LABEL, ANTI_PATTERNS_GROUP_LABEL]
+CASE_LABEL = '>>- ['
+ANTI_PATTERN_LABEL = '>- [ ] [['
+LABELS = [USER_LABEL, FUNCTION_LABEL, CASE_LABEL, ANTI_PATTERN_LABEL]
 
 SUCCESS_SIGN = '\u2705'
 WARNING_SIGN = '\U000026A0\U0000FE0F'
@@ -125,6 +125,8 @@ def get_report_lines(md_filepaths, is_detailed):
         function_line_index = None
         user_line = ''
         user_line_index = None
+        interface_line = 'Interface'
+        interface_line_index = None
 
         for index, line in enumerate(lines):
 
@@ -143,8 +145,23 @@ def get_report_lines(md_filepaths, is_detailed):
                 function_line_index = None
                 user_line = line
                 user_line_index = index
+            elif INTERFACE_LABEL in line:
+                case_line = ''
+                case_line_index = None
+                function_line = ''
+                function_line_index = None
+                user_line = ''
+                user_line_index = None
+                interface_line = line
+                interface_line_index = index
 
             if line.strip().startswith('- [x]'):
+
+                if interface_line:
+                    marked_lines.append(f'\n{interface_line.strip()}')
+                    new_lines[interface_line_index] = checked_interface_line
+                    interface_line = None
+                    interface_line_index = None
 
                 if user_line and '- [x]' not in user_line:
                     checked_user_line = user_line.replace('- [ ]', '- [x]')
