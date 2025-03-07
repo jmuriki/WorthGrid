@@ -314,8 +314,8 @@ def main():
     elif finalized_report_lines:
         report_file_path = save_report(finalized_report_lines, report_name)
         logger.info(f'{SUCCESS_SIGN} Отчёт успешно сформирован.')
-        logger.info('Полный путь к отчёту:')
-        logger.info(f'"{report_file_path}"')
+        print('\nПолный путь к отчёту:')
+        print(f'"{report_file_path}"\n')
     else:
         logger.info(f'{WARNING_SIGN} Все чек-боксы пусты. Формирование отчёта приостановлено.')
 
