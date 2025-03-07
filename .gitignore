@@ -164,4 +164,5 @@ cython_debug/
 .archive/
 .obsidian/
 calls/
+reports/
 WorthGrid.wiki*/
