@@ -231,8 +231,7 @@ def get_report_lines(md_filepaths, is_detailed):
                 report_lines.extend('\n')
             report_lines.extend(marked_lines)
 
-    refined_report_lines = finalize_report_lines(report_lines)
-    return refined_report_lines
+    return report_lines
 
 
 def finalize_report_lines(report_lines):
@@ -308,11 +307,12 @@ def main():
 
     md_filepaths = find_md_files()
     report_lines = get_report_lines(md_filepaths, is_detailed)
+    finalized_report_lines = finalize_report_lines(report_lines)
 
-    if report_lines and is_preview:
-        print('\n'.join(report_lines))
-    elif report_lines:
-        report_file_path = save_report(report_lines, report_name)
+    if finalized_report_lines and is_preview:
+        print('\n'.join(finalized_report_lines))
+    elif finalized_report_lines:
+        report_file_path = save_report(finalized_report_lines, report_name)
         logger.info(f'{SUCCESS_SIGN} Отчёт успешно сформирован.')
         logger.info('Полный путь к отчёту:')
         logger.info(f'"{report_file_path}"')
@@ -322,7 +322,7 @@ def main():
     if should_erase:
         result_msg = erase_changes()
         logger.info(result_msg)
-    elif should_clear and report_lines:
+    elif should_clear and finalized_report_lines:
         clear_check_boxes(md_filepaths)
         logger.info(f'{SUCCESS_SIGN} Чек-боксы успешно сброшены.')
 
