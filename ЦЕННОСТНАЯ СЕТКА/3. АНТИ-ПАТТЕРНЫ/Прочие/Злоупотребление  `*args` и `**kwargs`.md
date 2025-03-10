@@ -1,0 +1,77 @@
+***
+
+> [!cite] Описание
+>_Нет смысла использовать `*args` и/или `**kwargs` в функциях или методах, у которых известны аргументы. Это только снижает читаемость кода и его понимание.
+>Использование `*args` и/или `**kwargs` не даёт информации об аргументах функции, IDE не подсказывает, какие параметры можно передать в функцию, тем самым, повышается риск передачи лишних или неправильных параметров.
+Используйте `*args` и/или `**kwargs`, когда их гибкость оправдана, например, для обёрток, декораторов или для передачи множества дополнительных параметров._
+
+***
+### 💡 Пример 1
+
+
+**Плохо:**
+```python
+def add_numbers(*args):
+    if len(args) != 2:
+        raise ValueError('Функция ожидает ровно два аргумента')
+    return args[0] + args[1]
+
+result = add_numbers(3, 7)
+```
+
+**Хорошо:**
+```python
+def add_numbers(num1, num2):
+    return num1 + num2
+
+result = add_numbers(3, 7)
+```
+
+***
+### 💡 Пример 2
+
+
+**Плохо:**
+```python
+def create_user(**kwargs):
+    username = kwargs.get('username')
+    email = kwargs.get('email')
+    age = kwargs.get('age')
+
+    if username is None or email is None:
+        raise ValueError('username and email are required')
+    return {
+        'username': username,
+        'email': email,
+        'age': age if age is not None else 'unknown',
+    }
+
+user1 = create_user(username='john_doe', email='john@example.com', age=30)
+user2 = create_user(username='jane_doe', email='jane@example.com')
+```
+
+**Хорошо:**
+```python
+def create_user(username, email, age=None):
+    if username is None or email is None:
+        raise ValueError('username and email are required')
+    return {
+        'username': username,
+        'email': email,
+        'age': age if age is not None else 'unknown',
+    }
+
+user1 = create_user(username='john_doe', email='john@example.com', age=30)
+user2 = create_user(username='jane_doe', email='jane@example.com')
+```
+
+***
+
+> [!example] Связанные кейсы
+>- Интерфейс: [[SOURCE CODE PY]]
+>	- Функция: [[SOURCE CODE PY#𝑓 Бегло проследить поток исполнения программы|Бегло проследить поток исполнения программы]]
+
+***
+
+> [!info]
+> Если не удалось найти ничего подходящего или есть идея по улучшению, [[Контакты|пиши сюда]].
