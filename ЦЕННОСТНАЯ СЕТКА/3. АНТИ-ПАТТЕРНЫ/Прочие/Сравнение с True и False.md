@@ -13,7 +13,7 @@ is_active = True
 ...
 
 if is_active == True:
-    do_something()
+	do_something()
 ```
 
 **Хорошо:**
@@ -21,7 +21,7 @@ if is_active == True:
 is_active = True
 
 if is_active:
-    do_something()
+	do_something()
 ```
 
 ***

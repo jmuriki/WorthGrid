@@ -12,9 +12,9 @@
 from environs import Env
 
 def main():
-    env = Env()
-    env.read_env()
-    tg_chat_id = env.str('tg_chat_id')
+	env = Env()
+	env.read_env()
+	tg_chat_id = env.str('tg_chat_id')
 ```
 
 **Хорошо:**
@@ -22,9 +22,9 @@ def main():
 from environs import Env
 
 def main():
-    env = Env()
-    env.read_env()
-    tg_chat_id = env.str('TG_CHAT_ID')
+	env = Env()
+	env.read_env()
+	tg_chat_id = env.str('TG_CHAT_ID')
 ```
 
 > [!example] Связанные кейсы

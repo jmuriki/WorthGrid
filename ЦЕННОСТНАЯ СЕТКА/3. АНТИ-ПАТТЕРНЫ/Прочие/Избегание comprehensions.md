@@ -1,7 +1,7 @@
 ***
 
 > [!cite] Описание
->_Местоимение `my` является излишним и способно больше запутать, чем помочь понять код._
+>_Comprehensions позволяет легко создавать коллекции, но использовать данный функционал рекомендуется только для простых циклов for._
 
 ***
 ### 💡 Пример 1
@@ -9,14 +9,14 @@
 
 **Плохо:**
 ```python
-with open(file_path, "w") as my_file:
-	...
+comments = []
+for comment in tag_comments:
+	comments.append(comment.find('span').text)
 ```
 
 **Хорошо:**
 ```python
-with open(file_path, "w") as file:
-	...
+comments = [comment.find('span').text for comment in tag_comments]
 ```
 
 ***
@@ -25,38 +25,17 @@ with open(file_path, "w") as file:
 
 **Плохо:**
 ```python
-from environs import Env
-
-def main():
-	env = Env()
-	env.read_env()
-	my_vk_access_token =  env.str('VK_ACCESS_TOKEN')
+numbers = [...]
+even_numbers = []
+for number in numbers:
+	if number % 2 == 0:
+		even_numbers.append(number)
 ```
 
 **Хорошо:**
 ```python
-from environs import Env
-
-def main():
-	env = Env()
-	env.read_env()
-	vk_access_token =  env.str('VK_ACCESS_TOKEN')
-```
-
-***
-### 💡 Пример 3
-
-
-**Плохо:**
-```python
-def get_my_user_info(user_id):
-	...
-```
-
-**Хорошо:**
-```python
-def get_user_info(user_id):
-	...
+numbers = [...]
+even_numbers = [num for num in numbers if num % 2 == 0]
 ```
 
 ***

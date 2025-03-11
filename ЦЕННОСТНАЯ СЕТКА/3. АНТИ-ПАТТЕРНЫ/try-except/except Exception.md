@@ -12,19 +12,19 @@ _Не рекомендуется использовать базовое иск�
 **Плохо:**
 ```python
 try:
-    do_something()
+	do_something()
 except Exception as e:
-   logging.error('Произошла ошибка')
+	logging.error('Произошла ошибка')
 ```
 
 **Хорошо:**
 ```python
 try:
-    do_something()
+	do_something()
 except FileNotFoundError:
-    logging.error('Файл не найден!')
+	logging.error('Файл не найден!')
 except PermissionError:
-    logging.error('Нет прав доступа к файлу!')
+	logging.error('Нет прав доступа к файлу!')
 ```
 
 ***
@@ -34,21 +34,21 @@ except PermissionError:
 **Плохо:**
 ```python
 try:
-    function()
+	function()
 except Exception as e:
-   logging.error('Произошла ошибка!')
+	logging.error('Произошла ошибка!')
 ```
 
 **Хорошо:**
 ```python
 try:
-    function()
+	function()
 except FileNotFoundError:
-    logging.error('Файл не найден!')
+	logging.error('Файл не найден!')
 except PermissionError:
-    logging.error('Нет прав доступа к файлу!')
+	logging.error('Нет прав доступа к файлу!')
 except Exception as e:
-   logging.error(f'Произошла ошибка: {e}.')
+	logging.error(f'Произошла ошибка: {e}.')
 ```
 
 ***

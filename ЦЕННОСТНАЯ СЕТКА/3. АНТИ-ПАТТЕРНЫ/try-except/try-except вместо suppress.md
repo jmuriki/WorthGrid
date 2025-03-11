@@ -11,9 +11,9 @@ _Иногда требуется игнорировать исключение.
 **Плохо:**
 ```python
 try:
-    do_something()
+	do_something()
 except UnimportantError:
-    pass
+	pass
 ```
 
 **Хорошо:**
@@ -21,7 +21,7 @@ except UnimportantError:
 from contextlib import suppress
 
 with suppress(UnimportantError):
-    do_something()
+	do_something()
 ```
 
 ***
@@ -31,9 +31,9 @@ with suppress(UnimportantError):
 **Плохо:**
 ```python
 try:
-    do_something()
+	do_something()
 except UnimportantError:
-    continue
+	continue
 ```
 
 **Хорошо:**
@@ -41,7 +41,7 @@ except UnimportantError:
 from contextlib import suppress
 
 with suppress(UnimportantError):
-    do_something()
+	do_something()
 ```
 
 ***

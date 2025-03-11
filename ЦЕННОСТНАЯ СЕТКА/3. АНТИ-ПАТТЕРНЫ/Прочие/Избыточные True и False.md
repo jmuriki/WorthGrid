@@ -10,18 +10,18 @@
 **Плохо:**
 ```python
 def get_link_status(link):
-    ...
-    if link_status:
-        return True
-    else:
-        return False
+	...
+	if link_status:
+		return True
+	else:
+		return False
 ```
 
 **Хорошо:**
 ```python
 def get_link_status(link):
-    ...
-    return link_status
+	...
+	return link_status
 ```
 
 ***
@@ -33,16 +33,16 @@ def get_link_status(link):
 SECONDS_LIMIT = 3600
 
 def check_visit_length(duration, seconds_limit=SECONDS_LIMIT):
-    seconds_on = duration.total_seconds()
-    if seconds_on > seconds_limit:
-        return True
-    return False
+	seconds_on = duration.total_seconds()
+	if seconds_on > seconds_limit:
+		return True
+	return False
 
 def main():
-    ...
-    duration = ...
-    is_strange_visit = check_visit_length(duration)
-    ...
+	...
+	duration = ...
+	is_strange_visit = check_visit_length(duration)
+	...
 ```
 
 **Хорошо:**
@@ -50,14 +50,14 @@ def main():
 SECONDS_LIMIT = 3600
 
 def check_visit_length(duration, seconds_limit=SECONDS_LIMIT):
-    seconds_on = duration.total_seconds()
-    return seconds_on > seconds_limit
+	seconds_on = duration.total_seconds()
+	return seconds_on > seconds_limit
 
 def main():
-    ...
-    duration = ...
-    is_strange_visit = check_visit_length(duration)
-    ...
+	...
+	duration = ...
+	is_strange_visit = check_visit_length(duration)
+	...
 ```
 
 > [!example] Связанные кейсы

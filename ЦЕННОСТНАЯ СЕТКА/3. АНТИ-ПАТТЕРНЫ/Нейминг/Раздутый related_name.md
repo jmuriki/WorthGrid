@@ -22,13 +22,13 @@ flat.owners
 from django.db import models
 
 class Owner(models.Model):
-    ...
-    flats = models.ManyToManyField(
-        'Flat',
-        verbose_name='Квартиры в собственности',
-        related_name='flats_owners',
-    )
-    ...
+	...
+	flats = models.ManyToManyField(
+		'Flat',
+		verbose_name='Квартиры в собственности',
+		related_name='flats_owners',
+	)
+	...
 ```
 
 **Хорошо:**
@@ -36,13 +36,13 @@ class Owner(models.Model):
 from django.db import models
 
 class Owner(models.Model):
-    ...
-    flats = models.ManyToManyField(
-        'Flat',
-        verbose_name='Квартиры в собственности',
-        related_name='owners',
-    )
-    ...
+	...
+	flats = models.ManyToManyField(
+		'Flat',
+		verbose_name='Квартиры в собственности',
+		related_name='owners',
+	)
+	...
 ```
 
 > [!example] Связанные кейсы

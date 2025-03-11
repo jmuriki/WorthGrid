@@ -11,19 +11,19 @@ _Избегайте использования нескольких `except` б�
 **Плохо:**
 ```python
 try:
-    do_something()
+	do_something()
 except ValueError:
-    logging.error('Value error')
+	logging.error('Value error')
 except IndexError:
-    logging.error('Index error')
+	logging.error('Index error')
 ```
 
 **Хорошо:**
 ```python
 try:
-    do_something()
+	do_something()
 except (ValueError, IndexError) as e:
-    logging.error(f'Error: {e}')
+	logging.error(f'Error: {e}')
 ```
 
 > [!example] Связанные кейсы

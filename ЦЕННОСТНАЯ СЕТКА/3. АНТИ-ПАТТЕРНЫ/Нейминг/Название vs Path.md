@@ -10,21 +10,21 @@
 **Плохо:**
 ```python
 def download_image(url, filename, params=None):
-    response = requests.get(url, params=params)
-    response.raise_for_status()
+	response = requests.get(url, params=params)
+	response.raise_for_status()
 
-    with open(filename, 'wb') as file:
-        file.write(response.content)
+	with open(filename, 'wb') as file:
+		file.write(response.content)
 ```
 
 **Хорошо:**
 ```python
 def download_image(url, filepath, params=None):
-    response = requests.get(url, params=params)
-    response.raise_for_status()
+	response = requests.get(url, params=params)
+	response.raise_for_status()
 
-    with open(filepath, 'wb') as file:
-        file.write(response.content)
+	with open(filepath, 'wb') as file:
+		file.write(response.content)
 ```
 
 ***
@@ -37,7 +37,7 @@ from pathlib import Path
 
 filename = Path(files_folder_path) / filename
 with open(filename, 'r') as file:
-    ...
+	...
 ```
 
 **Хорошо:**
@@ -46,7 +46,7 @@ from pathlib import Path
 
 filepath = Path(files_folder_path) / filename
 with open(filepath, 'r') as file:
-    ...
+	...
 ```
 
 ***

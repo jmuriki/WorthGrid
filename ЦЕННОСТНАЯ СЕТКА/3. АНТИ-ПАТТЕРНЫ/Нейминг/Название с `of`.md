@@ -24,13 +24,13 @@ active_users_num = ...
 **Плохо:**
 ```python
 def get_info_of_user(user_id):
-    ...
+	...
 ```
 
 **Хорошо:**
 ```python
 def get_user_info(user_id):
-    ...
+	...
 ```
 
 ***
@@ -39,17 +39,17 @@ def get_user_info(user_id):
 **Плохо:**
 ```python
 class ProductOfCompany:
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
+	def __init__(self, name, price):
+		self.name = name
+		self.price = price
 ```
 
 **Хорошо:**
 ```python
 class CompanyProduct:
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
+	def __init__(self, name, price):
+		self.name = name
+		self.price = price
 ```
 
 ***

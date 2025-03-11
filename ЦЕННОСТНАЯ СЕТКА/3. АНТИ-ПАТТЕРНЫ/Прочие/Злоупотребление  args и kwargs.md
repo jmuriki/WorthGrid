@@ -12,9 +12,9 @@
 **Плохо:**
 ```python
 def add_numbers(*args):
-    if len(args) != 2:
-        raise ValueError('Функция ожидает ровно два аргумента')
-    return args[0] + args[1]
+	if len(args) != 2:
+		raise ValueError('Функция ожидает ровно два аргумента')
+	return args[0] + args[1]
 
 result = add_numbers(3, 7)
 ```
@@ -22,7 +22,7 @@ result = add_numbers(3, 7)
 **Хорошо:**
 ```python
 def add_numbers(num1, num2):
-    return num1 + num2
+	return num1 + num2
 
 result = add_numbers(3, 7)
 ```
@@ -34,17 +34,17 @@ result = add_numbers(3, 7)
 **Плохо:**
 ```python
 def create_user(**kwargs):
-    username = kwargs.get('username')
-    email = kwargs.get('email')
-    age = kwargs.get('age')
+	username = kwargs.get('username')
+	email = kwargs.get('email')
+	age = kwargs.get('age')
 
-    if username is None or email is None:
-        raise ValueError('username and email are required')
-    return {
-        'username': username,
-        'email': email,
-        'age': age if age is not None else 'unknown',
-    }
+	if username is None or email is None:
+		raise ValueError('username and email are required')
+	return {
+		'username': username,
+		'email': email,
+		'age': age if age is not None else 'unknown',
+	}
 
 user1 = create_user(username='john_doe', email='john@example.com', age=30)
 user2 = create_user(username='jane_doe', email='jane@example.com')
@@ -53,13 +53,13 @@ user2 = create_user(username='jane_doe', email='jane@example.com')
 **Хорошо:**
 ```python
 def create_user(username, email, age=None):
-    if username is None or email is None:
-        raise ValueError('username and email are required')
-    return {
-        'username': username,
-        'email': email,
-        'age': age if age is not None else 'unknown',
-    }
+	if username is None or email is None:
+		raise ValueError('username and email are required')
+	return {
+		'username': username,
+		'email': email,
+		'age': age if age is not None else 'unknown',
+	}
 
 user1 = create_user(username='john_doe', email='john@example.com', age=30)
 user2 = create_user(username='jane_doe', email='jane@example.com')

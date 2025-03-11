@@ -10,18 +10,18 @@
 **Плохо:**
 ```python
 def get_link_status(link):
-    ...
-    if link_status:
-        return True
-    else:
-        return False
+	...
+	if link_status:
+		return True
+	else:
+		return False
 ```
 
 **Хорошо:**
 ```python
 def get_link_status(link):
-    ...
-    return link_status
+	...
+	return link_status
 ```
 
 ***
@@ -31,17 +31,17 @@ def get_link_status(link):
 **Плохо:**
 ```python
 def is_active_user(user):
-    ...
-    user_status = False
-    return True if user_status else False
+	...
+	user_status = False
+	return True if user_status else False
 ```
 
 **Хорошо:**
 ```python
 def is_active_user(user):
-    ...
-    user_status = False
-    return user_status
+	...
+	user_status = False
+	return user_status
 ```
 
 ***
@@ -51,22 +51,22 @@ def is_active_user(user):
 **Плохо:**
 ```python
 def get_book_image_url(soup, book_page_url):
-    img_rel_path = soup.find('div', class_='bookimage').find('img')['src']
-    img_src = urljoin(book_page_url, img_rel_path)
-    return img_src
+	img_rel_path = soup.find('div', class_='bookimage').find('img')['src']
+	img_src = urljoin(book_page_url, img_rel_path)
+	return img_src
 
 ...
 image_src = get_book_image_url(soup, book_url)
 if image_src:
-    download_image(image_src)
+	download_image(image_src)
 ```
 
 **Хорошо:**
 ```python
 def get_book_image_url(soup, book_page_url):
-    img_rel_path = soup.find('div', class_='bookimage').find('img')['src']
-    img_src = urljoin(book_page_url, img_rel_path)
-    return img_src
+	img_rel_path = soup.find('div', class_='bookimage').find('img')['src']
+	img_src = urljoin(book_page_url, img_rel_path)
+	return img_src
 
 ...
 image_src = get_book_image_url(soup, book_url)

@@ -10,14 +10,14 @@
 **Плохо:**
 ```python
 def do_something(value):
-    print(value)
-    ...
+	print(value)
+	...
 ```
 
 **Хорошо:**
 ```python
 def do_something(value):
-    ...
+	...
 ```
 
 ***
@@ -35,9 +35,9 @@ except AnyException as e:
 **Хорошо:**
 ```python
 try:
-    do_something()
+	do_something()
 except AnyException as e:
-    logging.error(e)
+	logging.error(e)
 ```
 
 ***

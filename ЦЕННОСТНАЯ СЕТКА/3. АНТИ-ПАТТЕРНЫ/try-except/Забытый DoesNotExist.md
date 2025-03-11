@@ -16,12 +16,12 @@ product = Product.objects.get(id=product_id)
 **Хорошо:**
 ```python
 def get_product(product_id):
-    try:
-        product = Product.objects.get(id=product_id)
-    except Product.DoesNotExist:
-        logger.error(f'Продукт с id={product_id} не сущуствует.')
-        product = None
-    return product
+	try:
+		product = Product.objects.get(id=product_id)
+	except Product.DoesNotExist:
+		logger.error(f'Продукт с id={product_id} не сущуствует.')
+		product = None
+	return product
 ```
 
 ***
@@ -38,12 +38,12 @@ product = Product.objects.get(id=product_id)
 from django.core.exceptions import ObjectDoesNotExist
 
 def get_product(product_id):
-    try:
-        product = Product.objects.get(id=product_id)
-    except ObjectDoesNotExist:
-        logger.error(f'Продукт с id={product_id} не сущуствует.')
-        product = None
-    return product
+	try:
+		product = Product.objects.get(id=product_id)
+	except ObjectDoesNotExist:
+		logger.error(f'Продукт с id={product_id} не сущуствует.')
+		product = None
+	return product
 ```
 
 ***
@@ -53,9 +53,9 @@ def get_product(product_id):
 **Плохо:**
 ```python
 def view_product(request, product_id):
-    product = Product.objects.get(id=product_id)
-    ...
-    render(request, 'product.html', context=context)
+	product = Product.objects.get(id=product_id)
+	...
+	render(request, 'product.html', context=context)
 ```
 
 **Хорошо:**
@@ -63,9 +63,9 @@ def view_product(request, product_id):
 from django.shortcuts import get_object_or_404
 
 def view_product(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    ...
-    render(request, 'product.html', context=context)
+	product = get_object_or_404(Product, id=product_id)
+	...
+	render(request, 'product.html', context=context)
 ```
 
 ***

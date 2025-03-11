@@ -10,9 +10,9 @@ _Использовать try-except и исключения следует в �
 **Плохо:**
 ```python
 try:
-    value = collection['key']
+	value = collection['key']
 except KeyError:
-    value = None
+	value = None
 ```
 
 **Хорошо:**
@@ -27,18 +27,18 @@ value = collection.get('key')
 **Плохо:**
 ```python
 capitals = {
-  'Россия': 'Москва',
-   'Англия': 'Лондон',
+	'Россия': 'Москва',
+	'Англия': 'Лондон',
 }
 
 
 def get_capitals(country):
-    try:
-        capital = capitals[country]
-    except KeyError:
-        capital = None
-    finally:
-        return capital
+	try:
+		capital = capitals[country]
+	except KeyError:
+		capital = None
+	finally:
+		return capital
 
 
 print(get_capitals('Китай'))
@@ -47,8 +47,8 @@ print(get_capitals('Китай'))
 **Хорошо:**
 ```python
 capitals = {
-  'Россия': 'Москва',
-  'Англия': 'Лондон',
+	'Россия': 'Москва',
+	'Англия': 'Лондон',
 }
 
 
@@ -79,10 +79,10 @@ print(calculate(1, '2'))
 **Хорошо:**
 ```python
 def calculate(num1, num2):
-    if isinstance(num1, (int, float)) and isinstance(num2, (int, float)):
-        result = num1 + num2
-        return result
-    logging.warning('Ошибка: аргументы должны быть числами.')
+	if isinstance(num1, (int, float)) and isinstance(num2, (int, float)):
+		result = num1 + num2
+		return result
+	logging.warning('Ошибка: аргументы должны быть числами.')
 
 
 print(calculate(1, '2'))
