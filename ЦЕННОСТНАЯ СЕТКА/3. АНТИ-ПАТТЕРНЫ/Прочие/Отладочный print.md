@@ -27,9 +27,9 @@ def do_something(value):
 **Плохо:**
 ```python
 try:
-   do_something()
+	do_something()
 except AnyException as e:
-   print(e)
+	print(e)
 ```
 
 **Хорошо:**
