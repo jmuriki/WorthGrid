@@ -31,8 +31,7 @@ discounts = {
 	"bronze": 5,
 	"silver": 10,
 	"gold": 15,
-	"platinum": 20
-
+	"platinum": 20,
 }
 
 discount = discounts.get(customer_type, 0)
