@@ -28,10 +28,10 @@ else:
 customer_type = ...
 
 discounts = {
-    "bronze": 5,
-    "silver": 10,
-    "gold": 15,
-    "platinum": 20
+	"bronze": 5,
+	"silver": 10,
+	"gold": 15,
+	"platinum": 20
 
 }
 
