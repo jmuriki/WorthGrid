@@ -11,7 +11,7 @@
 **Плохо:**
 ```python
 def get_link_status(link):
-	...
+	link_status = ...
 	if link_status:
 		return True
 	else:
@@ -21,7 +21,7 @@ def get_link_status(link):
 **Хорошо:**
 ```python
 def get_link_status(link):
-	...
+	link_status = ...
 	return bool(link_status)
 ```
 
