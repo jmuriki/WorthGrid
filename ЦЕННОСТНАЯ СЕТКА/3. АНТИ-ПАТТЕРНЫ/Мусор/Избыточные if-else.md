@@ -22,7 +22,7 @@ def get_link_status(link):
 ```python
 def get_link_status(link):
 	...
-	return link_status
+	return bool(link_status)
 ```
 
 ***
