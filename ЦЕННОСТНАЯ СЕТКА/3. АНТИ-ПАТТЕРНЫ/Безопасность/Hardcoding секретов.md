@@ -18,13 +18,26 @@ def main():
 ```python
 from environs import Env
 
+
 def main():
 	env = Env()
 	env.read_env()
 
-	POSTGRES_DSN = env.str(POSTGRES_DSN)
+	POSTGRES_DSN = env.str('POSTGRES_DSN')
 ```
 
+**Хорошо:**
+```python
+import os
+
+from dotenv import load_dotenv
+
+
+def main():
+	load_dotenv()
+
+	POSTGRES_DSN = os.getenv('POSTGRES_DSN')
+```
 ***
 ### 💡 Пример 2
 Адрес `http://localhost:8000` может измениться. Следует вынести его в отдельную настройку - это позволит менять адрес за пределами кода.
@@ -38,13 +51,14 @@ def main():
 
 **Хорошо:**
 ```python
+from environs import Env
 from urllib.parse import urljoin
 
-from environs import Env
 
 def main():
 	env = Env()
 	env.read_env()
+
 	base_url = env.str('SERVICE_URL')
 	product_url = urljoin(base_url, 'api/products')
 	cart_url = urljoin(base_url, 'api/carts')
@@ -64,6 +78,7 @@ def main():
 ```python
 from environs import Env
 
+
 def main():
 	env = Env()
 	env.read_env()
@@ -71,6 +86,18 @@ def main():
 	SECRET_KEY = env.str('SECRET_KEY')
 ```
 
+**Хорошо:**
+```python
+import os
+
+from dotenv import load_dotenv
+
+
+def main():
+	load_dotenv()
+
+	SECRET_KEY = os.getenv('SECRET_KEY')
+```
 ***
 ### 💡 Пример 4
 Настройка ALLOWED_HOSTS нужна для безопасности вашего сайта. Она защищает от нескольких видов атак злоумышленников. Для защиты нужно, чтобы в этой переменной был указан домен, в котором развёрнут сайт. Как правило, default настройку для ALLOWED_HOSTS ставят `['127.0.0.1', 'localhost']`.
