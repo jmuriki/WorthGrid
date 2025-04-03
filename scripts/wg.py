@@ -140,37 +140,31 @@ def get_report_lines(md_filepaths, is_detailed):
         new_lines = []
         marked_lines = []
 
-        case_line = ''
-        case_line_index = None
-        function_line = ''
-        function_line_index = None
-        user_line = ''
-        user_line_index = None
-        anti_patterns_line = ''
+        case_line = function_line = user_line = anti_patterns_line = ''
+        case_line_index = function_line_index = user_line_index = None
         anti_patterns_level = None
 
-        for index, line in enumerate(lines):
+        for current_line_index, line in enumerate(lines):
 
             if ANTI_PATTERNS_LABEL in line:
                 anti_patterns_line = line
                 anti_patterns_level = line.count('#')
             elif CASE_LABEL in line:
                 case_line = line
-                case_line_index = index
+                case_line_index = current_line_index
             elif FUNCTION_LABEL in line:
                 case_line = ''
                 case_line_index = None
                 function_line = line
-                function_line_index = index
+                function_line_index = current_line_index
             elif USER_LABEL in line:
                 case_line = ''
                 case_line_index = None
                 function_line = ''
                 function_line_index = None
                 user_line = line
-                user_line_index = index
-
-            if line.strip().startswith(('- [x]', '>- [x]')):
+                user_line_index = current_line_index
+            elif line.strip().startswith(('- [x]', '>- [x]')):
 
                 if line.strip().startswith(ANTI_PATTERN_ATTRIBUTE) and anti_patterns_line:
                     if anti_patterns_level < 4:
@@ -187,7 +181,7 @@ def get_report_lines(md_filepaths, is_detailed):
                     user_check_box_line_index = user_line_index + 1
                     user_check_box_line = lines[user_check_box_line_index].replace('- [ ]', '- [x]')
                     marked_lines.append(f'{user_line.strip()}')
-                    if user_check_box_line_index < index:
+                    if user_check_box_line_index < current_line_index:
                         new_lines[user_check_box_line_index] = user_check_box_line
 
                     user_line = ''
@@ -197,7 +191,7 @@ def get_report_lines(md_filepaths, is_detailed):
                     function_check_box_line_index = function_line_index + 1
                     function_check_box_line = lines[function_check_box_line_index].replace('- [ ]', '- [x]')
                     marked_lines.append(f'{function_line.strip()}')
-                    if function_check_box_line_index < index:
+                    if function_check_box_line_index < current_line_index:
                         new_lines[function_check_box_line_index] = function_check_box_line
 
                     function_line = ''
@@ -207,7 +201,7 @@ def get_report_lines(md_filepaths, is_detailed):
                     case_check_box_line_index = case_line_index + 5
                     case_check_box_line = lines[case_check_box_line_index].replace('- [ ]', '- [x]')
                     marked_lines.append(f'{case_line.strip()}')
-                    if case_check_box_line_index < index:
+                    if case_check_box_line_index < current_line_index:
                         new_lines[case_check_box_line_index] = case_check_box_line
 
                     case_line = ''
