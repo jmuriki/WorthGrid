@@ -27,6 +27,28 @@ def get_link_status(link):
 
 ***
 ### 💡 Пример 2
+
+
+**Плохо:**
+```python
+def has_add_permission(self, request):
+	content_type = request.GET.get('content_type')
+	object_id = request.GET.get('object_id')
+	if content_type and object_id:
+		return True
+	return False
+```
+
+**Хорошо:**
+```python
+def has_add_permission(self, request):
+	content_type = request.GET.get('content_type')
+	object_id = request.GET.get('object_id')
+	return bool(content_type and object_id)
+```
+
+***
+### 💡 Пример 3
 При сравнении двух значений всегда возвращается bool. Поэтому, можно не использовать True и False явно, и высушить код.
 
 **Плохо:**
