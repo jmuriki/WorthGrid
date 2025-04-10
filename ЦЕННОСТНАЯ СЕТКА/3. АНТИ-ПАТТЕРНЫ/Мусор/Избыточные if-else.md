@@ -37,6 +37,14 @@ def is_active_user(user):
 	return True if user_status else False
 ```
 
+**Плохо:**
+```python
+def is_active_user(user):
+	...
+	user_status = True
+	return True if user_status else False
+```
+
 **Хорошо:**
 ```python
 def is_active_user(user):
@@ -45,6 +53,13 @@ def is_active_user(user):
 	return user_status
 ```
 
+**Хорошо:**
+```python
+def is_active_user(user):
+	...
+	user_status = True
+	return user_status
+```
 ***
 ### 💡 Пример 3
 В данном случае проверять `image_src` беcсмысленно. Функция всё равно вернёт какое-то значение отличное от `None`.

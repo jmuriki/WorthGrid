@@ -29,16 +29,16 @@ def do_something(value):
 ```python
 try:
 	do_something()
-except AnyException as e:
-	print(e)
+except AnyException as err:
+	print(err)
 ```
 
 **Хорошо:**
 ```python
 try:
 	do_something()
-except AnyException as e:
-	logging.error(e)
+except AnyException as err:
+	logging.error(err)
 ```
 
 ***

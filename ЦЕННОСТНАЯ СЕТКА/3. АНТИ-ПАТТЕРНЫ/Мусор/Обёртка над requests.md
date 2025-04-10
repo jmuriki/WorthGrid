@@ -5,96 +5,7 @@
 >_Если функция не упрощает код, то от нее лучше избавиться. Лишняя абстракция затруднит понимание и усложнит внесение правок. Функции полезны, когда они инкапсулируют сложность, прячут её внутри себя и таким образом упрощают внешний код._
 
 ***
-### 💡 Пример 1
-
-
-**Плохо:**
-```python
-from environs import Env
-
-
-def get_env():
-	env = Env()
-	return env.read_env()
-
-
-def main():
-	env = get_env()
-	...
-```
-
-**Хорошо:**
-```python
-from environs import Env
-
-
-def main():
-	env = Env()
-	env.read_env()
-	...
-```
-
-***
-### 💡 Пример 2
-
-
-**Плохо:**
-```python
-import os
-
-
-def get_filenames(directory):
-	filenames = os.listdir(directory)
-	return filenames
-
-
-def main():
-	...
-	filenames = get_filenames(directory)
-	...
-```
-
-**Хорошо:**
-```python
-import os
-
-
-def main():
-	...
-	filenames = os.listdir(directory)
-	...
-```
-
-***
-### 💡 Пример 3
-
-
-**Плохо:**
-```python
-def fetch_something(callback, url, error_message):
-    result = callback(url)
-    if not result:
-        raise SomeError(error_message)
-    return result
-
-
-def main():
-    try:
-        payload = fetch_something(get_some_payload, some_url, "Что-то пошло не так.")
-    except SomeError as err:
-        logger.error(err)
-```
-
-**Хорошо:**
-```python
-def main():
-	payload = get_some_payload(some_url)
-	if not payload:
-		logger.warning("Что-то пошло не так.")
-```
-
-***
-### 💡 Пример 4
+### 💡 Пример
 
 
 **Плохо:**
@@ -112,7 +23,7 @@ def main():
 	...
 	try:
 		response = send_request(url)
-	except requests.exceptions.HTTPError as err:
+	except:
 		...
 ```
 
@@ -126,11 +37,9 @@ def main():
 	try:
 		response = requests.get(url)
 		response.raise_for_status()
-	except requests.exceptions.HTTPError as err:
+	except:
 		...
 ```
-
-***
 
 > [!example] Связанные кейсы
 >- Интерфейс: [[SOURCE CODE PY]]

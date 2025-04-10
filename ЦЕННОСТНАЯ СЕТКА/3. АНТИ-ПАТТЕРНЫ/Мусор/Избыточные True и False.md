@@ -49,17 +49,19 @@ def has_add_permission(self, request):
 
 ***
 ### 💡 Пример 3
-При сравнении двух значений всегда возвращается bool. Поэтому, можно не использовать True и False явно, и высушить код.
+При сравнении двух значений всегда возвращается `bool`. Поэтому можно не использовать `True` и `False` явно, и высушить код.
 
 **Плохо:**
 ```python
 SECONDS_LIMIT = 3600
+
 
 def check_visit_length(duration, seconds_limit=SECONDS_LIMIT):
 	seconds_on = duration.total_seconds()
 	if seconds_on > seconds_limit:
 		return True
 	return False
+
 
 def main():
 	...
@@ -72,9 +74,11 @@ def main():
 ```python
 SECONDS_LIMIT = 3600
 
+
 def check_visit_length(duration, seconds_limit=SECONDS_LIMIT):
 	seconds_on = duration.total_seconds()
 	return seconds_on > seconds_limit
+
 
 def main():
 	...
