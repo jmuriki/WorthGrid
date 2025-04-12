@@ -28,6 +28,7 @@ with open(file_path, "w") as file:
 ```python
 from environs import Env
 
+
 def main():
 	env = Env()
 	env.read_env()
@@ -37,6 +38,7 @@ def main():
 **Хорошо:**
 ```python
 from environs import Env
+
 
 def main():
 	env = Env()

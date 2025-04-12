@@ -25,7 +25,22 @@ if is_active:
 	do_something()
 ```
 
-***
+**Плохо:**
+```python
+is_active = False
+...
+
+if is_active == False:
+	do_something()
+```
+
+**Хорошо:**
+```python
+is_active = False
+
+if not is_active:
+	do_something()
+```
 
 > [!example] Связанные кейсы
 >- Интерфейс: [[SOURCE CODE PY]]

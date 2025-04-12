@@ -36,6 +36,7 @@ def download_image(url, filepath, params=None):
 ```python
 from pathlib import Path
 
+
 filename = Path(files_folder_path) / filename
 with open(filename, 'r') as file:
 	...
@@ -44,6 +45,7 @@ with open(filename, 'r') as file:
 **Хорошо:**
 ```python
 from pathlib import Path
+
 
 filepath = Path(files_folder_path) / filename
 with open(filepath, 'r') as file:

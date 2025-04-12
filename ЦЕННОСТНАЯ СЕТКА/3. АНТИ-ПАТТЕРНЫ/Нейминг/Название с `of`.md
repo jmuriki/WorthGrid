@@ -30,7 +30,7 @@ def get_info_of_user(user_id):
 **Хорошо:**
 ```python
 def get_user_info(user_id):
-	...
+    ...
 ```
 
 ***
@@ -46,7 +46,7 @@ class ProductOfCompany:
 
 **Хорошо:**
 ```python
-class CompanyProduct:
+class Product:
 	def __init__(self, name, price):
 		self.name = name
 		self.price = price
