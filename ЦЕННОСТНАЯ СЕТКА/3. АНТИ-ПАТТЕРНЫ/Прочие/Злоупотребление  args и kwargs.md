@@ -38,12 +38,12 @@ def create_user(**kwargs):
 	email = kwargs.get('email')
 	age = kwargs.get('age')
 
-	if username is None or email is None:
+	if not username or not email:
 		raise ValueError('username and email are required')
 	return {
 		'username': username,
 		'email': email,
-		'age': age if age is not None else 'unknown',
+		'age': age if age else 'unknown',
 	}
 
 user1 = create_user(username='john_doe', email='john@example.com', age=30)
@@ -53,16 +53,35 @@ user2 = create_user(username='jane_doe', email='jane@example.com')
 **Хорошо:**
 ```python
 def create_user(username, email, age=None):
-	if username is None or email is None:
+	if not username or not email:
 		raise ValueError('username and email are required')
 	return {
 		'username': username,
 		'email': email,
-		'age': age if age is not None else 'unknown',
+		'age': age if age else 'unknown',
 	}
 
 user1 = create_user(username='john_doe', email='john@example.com', age=30)
 user2 = create_user(username='jane_doe', email='jane@example.com')
+```
+
+***
+### 💡 Пример 3
+Не всегда мы можем видеть `args` и `kwargs` в параметрах функции: такой нейминг - лишь соглашение между программистами. Иногда название может быть другим.
+
+**Плохо:**
+```python
+def display_user_info(user_info):
+    name = user_info.get('name')
+    age = user_info.get('age')
+    work = user_info.get('work')
+    ...
+```
+
+**Хорошо:**
+```python
+def display_user_info(name, age, work):
+    ...
 ```
 
 ***
