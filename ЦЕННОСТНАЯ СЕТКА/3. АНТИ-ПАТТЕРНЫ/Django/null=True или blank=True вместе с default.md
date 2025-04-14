@@ -1,3 +1,4 @@
+#django
 ***
 
 > [!quote] Описание
@@ -11,6 +12,7 @@
 ```python
 from django.db import models
 
+
 class Product(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True, default="Unknown")
 ```
@@ -19,12 +21,14 @@ class Product(models.Model):
 ```python
 from django.db import models
 
+
 class Product(models.Model):
     name = models.CharField(max_length=100, blank=True, default="Unknown")
 ```
 
 ```python
 from django.db import models
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)

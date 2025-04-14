@@ -1,3 +1,4 @@
+#django
 ***
 
 > [!quote] Описание
@@ -15,6 +16,7 @@
 ```python
 from django.db import models
 
+
 class Article(models.Model):
 	title = models.CharField(max_length=200)
 	summary = models.TextField(null=True, blank=True, default="")
@@ -27,6 +29,7 @@ class Article(models.Model):
 **Хорошо:**
 ```python
 from django.db import models
+
 
 class Article(models.Model):
 	title = models.CharField(max_length=200)
