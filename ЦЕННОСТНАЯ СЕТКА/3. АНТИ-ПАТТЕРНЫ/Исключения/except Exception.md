@@ -28,7 +28,7 @@ except PermissionError:
 	logging.error('Нет прав доступа к файлу!')
 ```
 
-**Приемлемо:**
+**Допустимо:**
 ```python
 try:
 	do_something()
